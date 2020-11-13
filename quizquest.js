@@ -1,5 +1,5 @@
 //CML Resource Questions for Quizlet set with var for arrays
-var questionsEl = [
+var questions = [
     {
     title: "What library tool must every user possess in order to access library materials?",
     options: ["ID card", "phone number", "library card", "credit card"],
@@ -29,59 +29,59 @@ var questionsEl = [
 
 //Add values to variables
 var score = 0;
-var questionsElindex = 0;
+var questionIndex = 0;
 
 //Designate code for declared variables
-var preciseTime = document.querySelector("#Counter");
-var timerEl = document.querySelector("#startCounter");
-var quizQuestions = document.querySelector("#Information");
+var currentTime = document.querySelector("#currentTime");
+var timer = document.querySelector("#startTimer");
+var questionsDiv = document.querySelector("#questionsDiv");
 var wrapper = document.querySelector("#wrapper");
 
 
 //Time remaining is 15 seconds per question:
-var timeRemaining = 76;
+var secondsLeft = 76;
 //Maintains penalty and interval timing
-var penaltyEl = 10;
-var intervalEl = 0;
+var penalty = 10;
+var holdInterval = 0;
 // Will create new elements if required
-var ulNew = document.createElement("ul");
+var ulCreate = document.createElement("ul");
 
 //Activates timer when button is pressed and displays user message
-timerEl.addEventListener("click", function() {
+timer.addEventListener("click", function() {
 
-    if (intervalEl === 0) {
-        intervalEl = setInterval(function(){
-            timeRemaining--;
-            preciseTime.textContent = "Time:" +timeRemaining;
+    if (holdInterval === 0) {
+        holdInterval = setInterval(function() {
+            secondsLeft--;
+            currentTime.textContent = "Time:" + secondsLeft;
 
-            if (timeRemaining <= 0) {
-                clearInterval(intervalEl);
+            if (secondsLeft <= 0) {
+                clearInterval(holdInterval);
                 allDone();
-                preciseTime.textContent = "Time is up!";
+                currentTime.textContent = "Timer Expired!";
             }
         }, 1000);
         
     }
-    render(questionsElindex);
+    render(questionIndex);
 });
 
 //Create function that generates Q&A to page
-function render(questionsElindex) {
-    quizQuestions.innerHTML = "";
-    ulNew.innerHTML = "";
+function render(questionIndex) {
+    questionsDiv.innerHTML = "";
+    ulCreate.innerHTML = "";
     //Will clear any existing data provided by browser^^
     //Create loops to display array information
-    for (var i = 0; i < questionsEl.length; i++) {
-        var playerQuestion = questionsEl[questionsElindex].title;
-        var playerOptions = questionsEl[questionsElindex].options;
-        quizQuestions.textContent = playerQuestion;
+    for (var i = 0; i < questions.length; i++) {
+        var playerQuestion = questions[questionIndex].title;
+        var playerOptions = questions[questionIndex].options;
+        questionsDiv.textContent = playerQuestion;
     }
     // New functions for playerOptions
     playerOptions.forEach(function (newItem){
         var listItem = document.createElement("li");
         listItem.textContent = newItem;
-        quizQuestions.appendChild(ulNew);
-        ulNew.appendChild(listItem);
+        questionsDiv.appendChild(ulCreate);
+        ulCreate.appendChild(listItem);
         listItem.addEventListener("click", (compare));
     })
 }
@@ -92,77 +92,77 @@ function compare(event) {
     if(element.matches("li")){
         var createDiv = document.createElement("div");
         createDiv.setAttribute("id", "createDiv");
-        if(element.textContent == questionsEl[questionsElindex].answer) {
+        if(element.textContent == questions[questionIndex].answer) {
             score++;
-            createDiv.textContent = "Correct! The answer is: " + questionsEl[questionsElindex].answer;
+            createDiv.textContent = "Correct! The answer is: " + questions[questionIndex].answer;
         }
         else{
-            timeRemaining = timeRemaining - penaltyEl;
-            createDiv.textContent = "Wrong Answer! The correct answer is: " + questionsEl[questionsElindex].answer;
+            secondsLeft = secondsLeft - penalty;
+            createDiv.textContent = "Wrong Answer! The correct answer is: " + questions[questionIndex].answer;
         }
     }
     //Set parameters for questionElindex to determine the question the user is on/recently completed
-    questionsElindex++;
-    if(questionsElindex >= questionsEl.length) {
+    questionIndex++;
+    if (questionIndex >= questions.length) {
         allDone();
-        createDiv.textContent = "End of CML Resource Quizlet!" + "" + "You earned" + score + "/" + questionsEl.length + "Correct!";
+        createDiv.textContent = "End of CML Resource Quizlet!" +  ""  +  "You earned"  +  score  + "/" + questions.length + "Correct!";
     }
     else{
-        render(questionsElindex);
+        render(questionIndex);
     }
-    quizQuestions.appendChild(createDiv);
+    questionsDiv.appendChild(createDiv);
 }
 
 //Last page for allDone render
 function allDone() {
-    quizQuestions.innerHTML = "";
-    preciseTime.innerHTML = "";
+    questionsDiv.innerHTML = "";
+   currentTime.innerHTML = "";
 
     //h1 setting
-    var newH1 = document.createElement("h1");
-    newH1.setAttribute("id", "newH1");
-    newH1.textContent = "All Done!"
-    quizQuestions.appendChild(newH1);
+    var createH1 = document.createElement("h1");
+    createH1.setAttribute("id", "createH1");
+    createH1.textContent = "All Done!"
+    questionsDiv.appendChild(createH1);
 
     //p setting
-    var newP = document.createElement("p");
-    newP.setAttribute("id", "newP");
-    quizQuestions.appendChild(newP);
+    var createP = document.createElement("p");
+    createP.setAttribute("id", "createP");
+    questionsDiv.appendChild(createP);
 
     //Produces remaining time and calculates score
-    if(timeRemaining >= 0) {
+    if (secondsLeft >= 0) {
         var timeRemaining = secondsLeft;
-        var newP2 = document.createElement("p2");
-        clearInterval(intervalEl);
-        newP.textContent = "Your Results are: " + timeRemaining;
-        quizQuestions.appendChild(newP2);
+        var createP2 = document.createElement("p2");
+        clearInterval(holdInterval);
+        createP.textContent = "Your final score is: " + timeRemaining;
+        questionsDiv.appendChild(createP2);
     }
 
     //label
-    var newLabel = document.createElement("label");
-    newLabel.setAttribute("id", "newLabel");
-    newLabel.textContent = "Enter your initials:";
-    quizQuestions.appendChild(newLabel);
+    var createLabel = document.createElement("label");
+    createLabel.setAttribute("id", "createLabel");
+    createLabel.textContent = "Enter your initials:";
+    questionsDiv.appendChild(createLabel);
 
     //input
-    var newInput = document.createElement("input");
-    newInput.setAttribute("type", "text");
-    newInput.setAttribute("id", "initials");
-    newInput.textContent = "";
-    quizQuestions.appendChild(newInput);
+    var createInput = document.createElement("input");
+    createInput.setAttribute("type", "text");
+    createInput.setAttribute("id", "initials");
+    createInput.textContent = "";
+    questionsDiv.appendChild(createInput);
 
     //submitt
-    var newSubmit = document.createElement("button");
-    newSubmit.setAttribute("type", "submit");
-    newSubmit.setAttribute("id", "Submit");
-    newSubmit.textContent = "Submit";
-    quizQuestions.appendChild(newSubmit);
+    var createSubmit = document.createElement("button");
+    createSubmit.setAttribute("type", "submit");
+    createSubmit.setAttribute("id", "Submit");
+    createSubmit.textContent = "Submit";
+    questionsDiv.appendChild(createSubmit);
 
     //event listener for storage
-    newSubmit.addEventListener("click", function(){
-        var initials = newInput.value;
+    createSubmit.addEventListener("click", function() {
+        var initials = createInput.value;
 
-        if (initials === null){
+        if (initials === null) {
             console.log("No value entered!");
         }
     
@@ -182,7 +182,7 @@ function allDone() {
             allScores.push(finalScore);
             var newScore = JSON.stringify(allScores);
             localStorage.setItem("allScores", newScore);
-            window.location.replace("scores.html");
+            window.location.replace("./HighScores.html");
         }
     });
 }
