@@ -10,8 +10,7 @@
 
 a {  
     position: relative;  
-    left: 22%;
-    top: 755px;
+    margin-left: auto;
     color: cornsilk;
     text-decoration: underline;
 }
