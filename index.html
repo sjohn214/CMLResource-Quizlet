@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CML Resource Quizlet</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+    <div class="banner">
+        <img class="img-banner" src="./assets/img/CML.jpeg" alt="CML visual graphic banner">
+    </div>
+
+
+    <div class="scores">
+        <a href="highestScores.html">Click here to View High Scores</a>
+    </div>
+
+
+    <div id="wrapper">
+        <div class="timer">
+            <span id="time"></span>
+        </div>
+
+        <div id="welcome">
+            <h1>Did You Know? CML Resource Challenge</h1>
+            <p> This is a quiz to test your knowledge of your
+                local library's resources. Read the
+                questions and provide your best response.
+                Please note that is a game of accuracy and speed.
+                Incorrect answer will reduce your timer by ten seconds!
+            </p>
+
+            <!--Button to start quizlet-->
+            <button id="startTimer">Start Quizlet</button>
+        </div>
+    </div>
+
+
+    <div class="questions hid" id="cml-quiz-questions">
+        <div class="options" id="options"></div>
+    </div>
+
+    <div class="endofgame" id="quiz-end">
+        <h2>Game Over</h2>
+        <button>Submit Score Results</button>
+    <input type="text" id="initials" placeholder="Include Initials"/>
+    </div>
+
+
+    <script src="/assets/javascript/index.js"></script>
+    <script src="/assets/javascript/quizletquestions.js"></script>
+</body>
+
+</html>
