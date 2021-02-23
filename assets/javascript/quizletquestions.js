@@ -12,8 +12,8 @@ var questions = [
 },
 {
     title: "I want to learn a new language, what lanuage subscriptions does the library have?",
-    options: ["Pimsleur", "Rosetta Stone", "Duolingo", "Babbel", "Mango Languages"],
-    answer: "Mango Languages"
+    options: ["Pimsleur", "Rosetta Stone", "Duolingo", "Babbel", "Transparent Language"],
+    answer: "Transparent Language"
 },
 {
     title: "How can I request a book that I see in your catalog?",

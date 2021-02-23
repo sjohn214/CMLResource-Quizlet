@@ -20,9 +20,28 @@ function start(){
   questionElement.removeAttribute("class")
   timer = setInterval(clock, 1000)
   timerElement.textContent = time
-}
+}render(index);
 
 function clock(){
     time --
     timerElement.textContent = time
 }
+
+
+// Creates function for generating Q&A to page. Creates loops to display array info////
+function render(index){
+  questionElement.innerHTML = "";
+  for (var i = 0; i < questions.length; i++){
+    var playQuestions = questions[index].title;
+    var playerOptions = playQuestions[index].options;
+    questionElement.textContent = playerQuestions;
+  }
+}
+
+playerOptions.forEach(function(createNew){
+  var newListed = document.createElement("li");
+  newListed.textContent = createNew;
+  questionElement.appendChild(newULsection);
+  newULsection.appendChild(newListed);
+  newListed.addEventListener("click", (compare));
+})
